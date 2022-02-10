@@ -27,7 +27,36 @@
 
 Cypress.Commands.add('login', (usuario, senha) => {
     cy.get('#username').type(usuario)
-    cy.get('#password').type(senha, {log: false})
+    cy.get('#password').type(senha)
     cy.get('.woocommerce-form > .button').click()
 });
+
+Cypress.Commands.add('addProdutos', () => {
+    
+    cy.get('.button-variable-item-36').click()
+    cy.get('.button-variable-item-Blue').click()
+    cy.get('.single_add_to_cart_button').click()
+
+    cy.get('#primary-menu > .menu-item-629 > a').click()
+    cy.get('.post-3111 > .product-block').click()
+
+    cy.get('.button-variable-item-L').click()
+    cy.get('.button-variable-item-Yellow').click()
+    cy.get('.single_add_to_cart_button').click()
+
+    cy.get('#primary-menu > .menu-item-629 > a').click()
+    cy.get('.post-3374 > .product-block').click()
+
+    cy.get('.button-variable-item-32').click()
+    cy.get(':nth-child(2) > .value > .variable-items-wrapper > .variable-item').click()
+    cy.get('.single_add_to_cart_button').click()
+
+    cy.get('#primary-menu > .menu-item-629 > a').click()
+    cy.get('.post-2622 > .product-block').click()
+
+    cy.get('.button-variable-item-M').click()
+    cy.get('.button-variable-item-Red').click()
+    cy.get('.single_add_to_cart_button').click()
+
+})
 
