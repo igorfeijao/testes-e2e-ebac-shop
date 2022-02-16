@@ -6,7 +6,7 @@ const endereco = require('../fixtures/endereco.json')
 context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
     
     beforeEach(() => {
-        cy.visit('http://lojaebac.ebaconline.art.br')
+        cy.visit('/')
         cy.get('.icon-user-unfollow').click()
         cy.login('iaraujo@teste.com', '@igor135')
     });
@@ -23,17 +23,14 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
 
         cy.get('#primary-menu > .menu-item-629 > a').click()
 
-        cy.get('.post-3073 > .product-block').click()
+        cy.addProdutos('Abominable Hoodie', 'M', 'Red')
+        cy.addProdutos('Aero Daily Fitness Tee', 'L', 'Black')
+        cy.addProdutos('Aether Gym Pant', '36', 'Brown')
+        cy.addProdutos('Atlas Fitness Tank', 'S', 'Blue')
 
-        cy.addProdutos()
+        cy.checkout()
 
-        cy.get('.woocommerce-message > .button').click()
-        cy.get('.checkout-button').click()
-
-        cy.get('#payment_method_cod').click()
-        cy.get('#terms').click({ force: true })
-
-        cy.get('#place_order').click({ force: true })
+        cy.get('.woocommerce-notice').should('contain', 'Seu pedido foi recebido')
 
     });
 

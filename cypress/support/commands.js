@@ -31,32 +31,21 @@ Cypress.Commands.add('login', (usuario, senha) => {
     cy.get('.woocommerce-form > .button').click()
 });
 
-Cypress.Commands.add('addProdutos', () => {
+Cypress.Commands.add('addProdutos', (produto, tamanho, cor) => {
+    cy.get('[class="products products-grid"]')
+       .contains(produto)
+       .click()
+    cy.get('.button-variable-item-' + tamanho).click()
+    cy.get('.button-variable-item-' + cor).click()
+    cy.get('.single_add_to_cart_button').click()
     
-    cy.get('.button-variable-item-36').click()
-    cy.get('.button-variable-item-Blue').click()
-    cy.get('.single_add_to_cart_button').click()
-
     cy.get('#primary-menu > .menu-item-629 > a').click()
-    cy.get('.post-3111 > .product-block').click()
+ })
 
-    cy.get('.button-variable-item-L').click()
-    cy.get('.button-variable-item-Yellow').click()
-    cy.get('.single_add_to_cart_button').click()
-
-    cy.get('#primary-menu > .menu-item-629 > a').click()
-    cy.get('.post-3374 > .product-block').click()
-
-    cy.get('.button-variable-item-32').click()
-    cy.get(':nth-child(2) > .value > .variable-items-wrapper > .variable-item').click()
-    cy.get('.single_add_to_cart_button').click()
-
-    cy.get('#primary-menu > .menu-item-629 > a').click()
-    cy.get('.post-2622 > .product-block').click()
-
-    cy.get('.button-variable-item-M').click()
-    cy.get('.button-variable-item-Red').click()
-    cy.get('.single_add_to_cart_button').click()
-
+Cypress.Commands.add('checkout', () => {
+    cy.get('.dropdown-toggle > .text-skin > .icon-basket').click()
+    cy.get('#cart > .dropdown-menu > .widget_shopping_cart_content > .mini_cart_content > .mini_cart_inner > .mcart-border > .buttons > .checkout').click()
+    cy.get('#payment_method_cod').click()
+    cy.get('#terms').click({ force: true })
+    cy.get('#place_order').click({ force: true })
 })
-
